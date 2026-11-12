@@ -45,6 +45,8 @@ powershell -ExecutionPolicy Bypass -File scripts/Configure-UE.ps1 -ProjectPath "
 
 ## 默认验证规则
 
+编辑器接口能够完成的修改，直接使用 EngineWire 原生能力，包括批量编辑；只有确认接口缺失或有缺陷时才说明原因并对缺口使用最小 Python 等回退。蓝图、组件、UMG、材质、导入与编译保存均适用，详见 [编辑器接口优先](plugins/ue/skills/ue-connect/SKILL.md#编辑器接口优先)。工具调用方式与游戏运行时采用蓝图还是 C++ 分开说明。
+
 **一般情况下只保证相关编译通过，不专门启动 UE 或进行运行测试，除非用户明确要求。**
 
 - 不默认运行 PIE、游戏、自动输入、运行回归或重启重连测试。

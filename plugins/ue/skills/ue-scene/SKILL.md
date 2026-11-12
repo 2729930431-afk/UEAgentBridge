@@ -7,6 +7,6 @@ description: Inspect and modify UE levels, actors, transforms and lights using E
 
 Use ue-connect's connection workflow. Discover the exact scene capability and describe its input schema. Read the current map and target actors before edits. Preserve user assets and confine writes to the user's intended map and content paths.
 
-Prefer native actor, level, material and collision interfaces for scene edits. When the user requests interface-based placement, use structured business capabilities rather than executing a scene script. Python is a supplement only when needed and within the user's requested method; describe its contract first, keep it bounded, and report which method was used.
+遵循 [编辑器接口优先](../ue-connect/SKILL.md#编辑器接口优先)：Actor、关卡、预制体组件、碰撞、变换、可见性等有对应能力时，直接使用接口；多个对象也应组合接口完成。仅在确认接口缺失或有缺陷后，说明原因并对缺口使用最小回退；Python 回退仍须 describe `system_control.execute_python` 并使用当次 consent grant，脚本保持有界。
 
 For scene edits in an already authorized editor session, read actor labels, classes and transforms back and save the map. Capture and inspect the viewport when the user requests visual validation; do not start the editor or PIE merely to obtain evidence. Preserve the project's existing GameMode, player input and collision unless changing them is part of the task. Report compilation and runtime verification separately, stating when runtime tests were not run.
