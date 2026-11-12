@@ -1,0 +1,15 @@
+# Machine configuration, authentication and Unreal build outputs
+.codex/
+config.local.json
+**/Saved/
+**/Intermediate/
+**/Binaries/
+**/DerivedDataCache/
+**/node_modules/
+**/__pycache__/
+*.pyc
+*.sln
+.vs/
+.env
+.env.*
+!*.example

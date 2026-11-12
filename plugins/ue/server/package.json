@@ -1,0 +1,83 @@
+{
+  "name": "unreal-engine-mcp-server",
+  "version": "0.6.0",
+  "mcpName": "io.github.ChiR24/unreal-engine-mcp",
+  "description": "EngineWire: an MCP server and Unreal Editor plugin that let AI assistants build in Unreal Engine 5.0-5.8: levels, Blueprints, UI, materials, effects and more.",
+  "homepage": "https://enginewire.dev",
+  "type": "module",
+  "bin": {
+    "unreal-engine-mcp-server": "dist/cli.js"
+  },
+  "files": [
+    "dist/cli.js",
+    "dist/constants.js",
+    "dist/proxy/*.js",
+    "dist/utils/config/*.js",
+    "dist/utils/logging/*.js",
+    "server.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "build:core": "tsc -p tsconfig.json",
+    "build": "npm run clean && npm run build:core",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "start": "node dist/cli.js",
+    "dev": "ts-node-esm src/cli.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:cpp": "echo \"Running C/C++ lint (cpplint)\" && (python -m cpplint --recursive plugins || echo 'cpplint not found; skipping C/C++ lint')",
+    "clean": "node -e \"for (const p of ['dist','tsconfig.tsbuildinfo']) require('fs').rmSync(p,{recursive:true,force:true})\"",
+    "prepare": "node -e \"require('fs').existsSync('dist/cli.js')||require('child_process').execSync('npm run build',{stdio:'inherit'})\"",
+    "automation:sync": "node scripts/sync-mcp-plugin.js",
+    "clean:tmp": "node -e \"require('fs').rmSync('tmp',{recursive:true,force:true})\"",
+    "test": "node tests/integration.mjs",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:all": "node tests/integration.mjs",
+    "test:params": "node tests/parameter-combination-audit.mjs --static --strict --optional-strict",
+    "type-check": "tsc --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "type-check:src": "tsc --noEmit",
+    "type-check:tests": "tsc -p tsconfig.test.json --noEmit",
+    "registry:generate": "node --loader ts-node/esm scripts/generate-canonical-registry.ts",
+    "registry:check": "node --loader ts-node/esm scripts/generate-canonical-registry.ts --check",
+    "manifest:check": "node --loader ts-node/esm scripts/generate-gateway-manifest.ts --check",
+    "headers:generate": "node --loader ts-node/esm scripts/generate-native-headers.ts",
+    "headers:check": "node --loader ts-node/esm scripts/generate-native-headers.ts --check",
+    "eval:check": "vitest run --config tests/eval/vitest.eval.config.ts",
+    "version:check": "vitest run tests/unit/version-consistency.test.ts",
+    "native:check": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/native-gates.ps1"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "keywords": [
+    "enginewire",
+    "mcp",
+    "modelcontextprotocol",
+    "unreal",
+    "unreal-engine",
+    "ue5",
+    "remote-control",
+    "automation",
+    "game-development"
+  ],
+  "author": "Unreal Engine MCP Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "@modelcontextprotocol/client": "2.3.1",
+    "@types/node": "^26.0.1",
+    "@typescript-eslint/eslint-plugin": "8.63.0",
+    "@typescript-eslint/parser": "8.63.0",
+    "@vitest/coverage-v8": "^4.0.16",
+    "eslint": "9.39.5",
+    "eslint-plugin-n": "^18.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "5.9.3",
+    "vitest": "^4.0.16",
+    "zod": "^4.2.1"
+  }
+}

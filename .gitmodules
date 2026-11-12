@@ -1,0 +1,3 @@
+[submodule "external/EngineWire"]
+	path = external/EngineWire
+	url = https://github.com/ChiR24/Unreal_mcp.git

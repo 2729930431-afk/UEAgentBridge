@@ -1,0 +1,15 @@
+{
+  "name": "ue",
+  "version": "0.2.0",
+  "description": "UE editor workflows backed by EngineWire 0.6.0. Initial tested target: UE 5.6.1.",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "requires_local_executor": true,
+  "interface": {
+    "displayName": "UE",
+    "shortDescription": "UE 5.6.1 editor tools and shared workflows powered by EngineWire.",
+    "longDescription": "Connect Codex to Unreal Editor through EngineWire. Discover native actor, level, Blueprint and editor tools, with shared connection, scene, Blueprint and validation skills. Compilation is the default validation; runtime testing requires an explicit request.",
+    "developerName": "Local developer",
+    "category": "Developer Tools"
+  }
+}
