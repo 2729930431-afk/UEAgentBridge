@@ -1,4 +1,6 @@
 # UEAgentBridge
+
+本仓库固定 GitHub 远端为 `https://github.com/2729930431-afk/UEAgentBridge.git`（`origin`，默认分支 `main`）。后续发布直接使用该地址，不重复询问。
 Connect AI coding agents to Unreal Engine through MCP tools and shared skills, powered by EngineWire.
 
 **UE 0.2.0** 是首个 Codex 接入版本：提供本地 MCP 接入、连接/场景/蓝图/验证四个共享 Skill，以及可扩展的 Agent 接入结构。当前只实现 Codex；Claude Code、Qoder 尚未适配或测试。
@@ -44,6 +46,8 @@ powershell -ExecutionPolicy Bypass -File scripts/Configure-UE.ps1 -ProjectPath "
 需要进行编辑器操作时，由用户启动目标 UE 项目，启用 EngineWire 的 Native MCP 服务；默认地址 `http://127.0.0.1:3000/mcp`。连接令牌由 UE 插件生成，stdio 代理从目标项目读取。用户未要求时，插件不会为了验收主动打开或重启 UE。
 
 ## 默认验证规则
+
+运行中的编辑器优先通过 Live Coding 应用 C++ 修改，必须分别确认编译成功与补丁已应用；不混用编号 Hot Reload 构建，不默认要求重启。详见 [热加载工作流](plugins/ue/skills/ue-connect/references/live-coding.md)。
 
 编辑器接口能够完成的修改，直接使用 EngineWire 原生能力，包括批量编辑；只有确认接口缺失或有缺陷时才说明原因并对缺口使用最小 Python 等回退。蓝图、组件、UMG、材质、导入与编译保存均适用，详见 [编辑器接口优先](plugins/ue/skills/ue-connect/SKILL.md#编辑器接口优先)。工具调用方式与游戏运行时采用蓝图还是 C++ 分开说明。
 

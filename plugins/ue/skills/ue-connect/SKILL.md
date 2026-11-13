@@ -9,6 +9,12 @@ Read [plugin setup](../../README.md) for configuration. Determine the intended p
 
 EngineWire exposes one MCP tool, `unreal`. Start with `operation: search`, then copy the selected result's `nextCall` to describe it. Use the returned contract to execute; never infer parameters from another UE bridge.
 
+## C++ 热加载优先
+
+编辑器已运行时，普通 C++ 修改优先通过现有编辑器接口触发 Live Coding，并核实补丁已应用到当前进程。先读 [Live Coding 工作流](references/live-coding.md)，再编译或诊断热加载失败。不要在 Live Coding 会话中使用 `-ModuleWithSuffix` 或传统 Hot Reload 构建；不能把磁盘编译成功、命令返回 success 或“no code changes detected”当成当前会话已更新。
+
+热加载失败先检查实际加载模块、构建目标和日志，排除参数或模块不一致；不得直接归因为桥接无法热加载，也不得直接把重启交给用户。只有证据表明本次变更无法安全热应用，或加载基线确需修复时，才说明具体原因并按本次授权处理。重启授权不自动延续到后续任务。
+
 ## 编辑器接口优先
 
 修改 UE 场景、资产、组件属性、蓝图图表、UMG、材质、导入设置或执行编译保存时，先通过 `unreal` 的 search → describe 查找对应的原生编辑器能力。接口能够完成的操作，必须直接使用该接口；批量操作也应组合对应接口，不因减少调用次数或脚本编写方便而改用 Python。
